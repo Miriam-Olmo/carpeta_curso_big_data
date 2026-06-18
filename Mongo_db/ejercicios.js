@@ -53,13 +53,23 @@ db = conn.getDB('sismosdb');
 // Queremos buscar terremotos en los que las estaciones cumplan con ciertos filtros
 // distanciaKM < 50 y magnitudLocal >= 6
 
-ejercicio6 = db.sismos.find({
-    estaciones: {
-        $elemMatch: {
-            distanciaKm: { $lt: 50 },
-            magnitudLocal: { $gte: 6 }
-        }
-    }
-}, { _id: 0, lugar: 1, estaciones: 1 })
+// ejercicio6 = db.sismos.find({
+//     estaciones: {
+//         $elemMatch: {
+//             distanciaKm: { $lt: 50 },
+//             magnitudLocal: { $gte: 6 }
+//         }
+//     }
+// }, { _id: 0, lugar: 1, estaciones: 1 })
 
-printjson(ejercicio6)
+// printjson(ejercicio6);
+
+
+// recuperar todos los sismos cuyo type de la ubicacion sea Point
+ejercicio7 = db.sismos.find(
+    {
+        'ubicacion.type': 'Point'
+    }
+).count();
+
+printjson(ejercicio7)
